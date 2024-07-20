@@ -1,0 +1,105 @@
+---
+title: "[ECODEVT] Data Analysis"
+author: "Group 1"
+date: today
+format: 
+  html:
+    toc: true
+    theme: united
+    embed-resources: true
+knitr:
+  opts_chunk: 
+    warning: false
+    message: false
+editor: visual
+---
+
+# Paper Details
+
+## **Research Question**
+
+Are the current Philippine education system and alternative training programs adequate to cater to the educational and physiological needs of persons with disabilities (PWDs) in Barangay CAA?
+
+## **Statement of Hypothesis**
+
+Ho: The regular schooling and alternative learning system for PWDs in Barangay CAA is accessible.
+
+Ha: The regular schooling and alternative learning system for PWDs in Barangay CAA is inaccessible.
+
+## **Research Objectives**
+
+-   Illustrate the school attendance of PWDs
+
+-   Identify the barriers experienced by PWDs in the education system
+
+-   Evaluate the accessibility of regular schools and ALS programs in accommodating various disabilities
+
+------------------------------------------------------------------------
+
+# Preliminary Steps
+
+## Install and load the necessary data sets
+
+```{r}
+
+```
+
+## Install and load R packages
+
+Make sure that the system has access to the *tidyverse*, *psych,* and *readxl* packages needed for data management, and the *car, broom, lmtest,* *whitestrap,* and *wooldridge* needed for regression models.
+
+```{r}
+# Install three packages that are not yet installed
+if(!("tidyverse" %in% installed.packages()[,"Package"])) install.packages("tidyverse")
+if(!("readxl" %in% installed.packages()[,"Package"])) install.packages("readxl")
+if(!("psych" %in% installed.packages()[,"Package"])) install.packages("psych")
+if(!("car" %in% installed.packages()[,"Package"])) install.packages("car")
+if(!("broom" %in% installed.packages()[,"Package"])) install.packages("broom")
+if(!("lmtest" %in% installed.packages()[,"Package"])) install.packages("lmtest")
+if(!("whitestrap" %in% installed.packages()[,"Package"])) install.packages("whitestrap")
+if(!("wooldridge" %in% installed.packages()[,"Package"])) install.packages("wooldridge")
+
+library(tidyverse)
+library(readxl)
+library(psych)
+library(car)
+library(broom)
+library(lmtest)
+library(whitestrap)
+library(wooldridge)
+library(ggplot2)
+```
+
+------------------------------------------------------------------------
+
+## OBJECTIVE 1 \| Illustrate the school attendance of PWDs
+
+### \[1.1\] School attendance
+
+### \[1.2\] Current enrollment
+
+### \[1.3\] School category
+
+------------------------------------------------------------------------
+
+## OBJECTIVE 2 \| Identify the barriers
+
+### \[2.1\] Nonattendance
+
+### \[2.2\] Nonenrollment
+
+------------------------------------------------------------------------
+
+## OBJECTIVE 3 \| Evaluate the accessibility
+
+### **\[3.1\] Descriptive**
+
+#### \[3.1.1\] Years of Schooling
+
+#### \[3.1.2\] Type of Schooling
+
+### **\[3.2\] Statistic**
+
+#### \[3.2.1\] ANOVA
+
+#### \[3.2.2\] Regression
