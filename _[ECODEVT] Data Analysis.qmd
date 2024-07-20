@@ -171,11 +171,11 @@ ggplot(data = educ_data, aes(x = currenrollment_categ)) +
 
 ### \[1.3\] School category
 ```{r}
-epiDisplay::tab1(CAA$schoolcateg_categ, cum.percent = TRUE, graph = FALSE)
+epiDisplay::tab1(educ_data$schoolcateg_categ, cum.percent = TRUE, graph = FALSE)
 ```
 
 ```{r}
-count<-table(CAA$schoolcateg_categ) #this is to see how many are movies in your data and how many are TV shows.
+count<-table(educ_data$schoolcateg_categ) #this is to see how many are movies in your data and how many are TV shows.
 count
 ```
 
