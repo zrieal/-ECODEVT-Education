@@ -74,7 +74,76 @@ library(ggplot2)
 
 ## OBJECTIVE 1 \| Illustrate the school attendance of PWDs
 
+```{r}
+# Install three packages that are not yet installed
+if(!("tidyverse" %in% installed.packages()[,"Package"])) install.packages("tidyverse")
+if(!("readxl" %in% installed.packages()[,"Package"])) install.packages("readxl")
+if(!("psych" %in% installed.packages()[,"Package"])) install.packages("psych")
+if(!("car" %in% installed.packages()[,"Package"])) install.packages("car")
+if(!("broom" %in% installed.packages()[,"Package"])) install.packages("broom")
+if(!("lmtest" %in% installed.packages()[,"Package"])) install.packages("lmtest")
+if(!("whitestrap" %in% installed.packages()[,"Package"])) install.packages("whitestrap")
+if(!("wooldridge" %in% installed.packages()[,"Package"])) install.packages("wooldridge")
+
+library(tidyverse)
+library(readxl)
+library(psych)
+library(car)
+library(broom)
+library(lmtest)
+library(whitestrap)
+library(wooldridge)
+library(ggplot2)
+```
+
+------------------------------------------------------------------------
+
+```{r}
+educ_data <- read_excel("C:/Users/admin/OneDrive/Documents/RSTUDIO/ecodevt v24 database Barangay CAA (1).xlsx", sheet = "MAIN")
+```
+
 ### \[1.1\] School attendance
+
+```{r}
+psych::describe(educ_data$schoolattendance_dummy)
+```
+```{r}
+count<-table(educ_data$schoolattendance_dummy)
+```
+```{r}
+library(ggplot2)
+library(dplyr)  # For data manipulation
+
+# Assuming 'count' is your data frame with counts
+count_schoolattendance <- as.data.frame(count)
+
+# Rename the columns for clarity
+names(count_schoolattendance) <- c("type", "count")
+
+# Calculate percentages
+count_schoolattendance <- count_schoolattendance %>%
+  mutate(
+    percentage = count / sum(count) * 100,
+    label = paste0(type, ": ", count, " (", round(percentage, 1), "%)")
+  )
+
+# Create the plot
+ggplot(count_schoolattendance, aes(x = "", y = count, fill = type)) +
+  geom_bar(width = 1, stat = "identity", color = "black") +  # Create a bar plot
+  coord_polar("y") +  # Convert the bar plot to a pie chart
+  scale_fill_manual(values = c("green", "orange")) +  # Set custom colors for the fill
+  labs(
+    title = "Percentage of PWDs Who Attended School",  # Update the plot title
+    x = NULL,  # Remove x-axis label
+    y = NULL,  # Remove y-axis label
+    fill = "Category"  # Legend title
+  ) +
+  geom_text(aes(label = label), 
+            position = position_stack(vjust = 0.5), 
+            color = "black")  # Add labels with count and percentage
+
+```
+The pie graph above represents the percentage of PWDs who attended school, represented by the binary variable 1, and the percentage of PWDs who did not attend school, represented by binary variable 0. It could be seen that 89.1% of the respondents, which corresponds to 302 PWDs from Barangay CAA, has attended school or is still attending to school. This is a substantial majority that may indicate accessibility of education to PWDs within the community. However, 10.9% of the PWDs have failed to attend school, highlighting a gap in educational attendance. But despite the significantly large portion of the population who have attended school, this does not equate student retention, nor quality education.
 
 ### \[1.2\] Current enrollment
 
