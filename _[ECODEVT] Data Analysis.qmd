@@ -146,6 +146,28 @@ ggplot(count_schoolattendance, aes(x = "", y = count, fill = type)) +
 The pie graph above represents the percentage of PWDs who attended school, represented by the binary variable 1, and the percentage of PWDs who did not attend school, represented by binary variable 0. It could be seen that 89.1% of the respondents, which corresponds to 302 PWDs from Barangay CAA, has attended school or is still attending to school. This is a substantial majority that may indicate accessibility of education to PWDs within the community. However, 10.9% of the PWDs have failed to attend school, highlighting a gap in educational attendance. But despite the significantly large portion of the population who have attended school, this does not equate student retention, nor quality education.
 
 ### \[1.2\] Current enrollment
+```{r}
+psych::describe(educ_data$currenrollment_categ)
+```
+
+```{r}
+count<-table(educ_data$currenrollment_categ) 
+count
+```
+
+```{r}
+epiDisplay::tab1(educ_data$currenrollment_categ, cum.percent = TRUE, graph = FALSE)
+```
+
+```{r}
+ggplot(data = educ_data, aes(x = currenrollment_categ)) +   
+  geom_histogram(bins = 15, color ="blue", fill = "cyan") +    
+  theme_minimal()+
+  labs(title = "Histogram: Current Enrollment Status")+
+  xlab("Current Enrollment") +
+  ylab("Count") +   
+  theme(plot.title = element_text(color = "blue", size = 14, face = "italic"), plot.subtitle = element_text(color = "blue", size = 12, face = "italic"))
+```
 
 ### \[1.3\] School category
 
