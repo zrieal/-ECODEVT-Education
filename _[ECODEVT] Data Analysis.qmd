@@ -151,12 +151,43 @@ psych::describe(educ_data$currenrollment_categ)
 ```
 
 ```{r}
+epiDisplay::tab1(educ_data$currenrollment_categ, cum.percent = TRUE, graph = FALSE)
+```
+
+```{r}
 count<-table(educ_data$currenrollment_categ) 
 count
 ```
 
 ```{r}
-epiDisplay::tab1(educ_data$currenrollment_categ, cum.percent = TRUE, graph = FALSE)
+library(ggplot2)
+library(dplyr)  
+
+count_currenrollment_categ <- as.data.frame(count)
+
+
+names(count_currenrollment_categ) <- c("type", "count")
+
+
+count_currenrollment_categ <- count_currenrollment_categ %>%
+  mutate(
+    percentage = count / sum(count) * 100,
+    label = paste0(type, ": ", count, " (", round(percentage, 1), "%)")
+  )
+
+ggplot(count_currenrollment_categ, aes(x = "", y = count, fill = type)) +
+  geom_bar(width = 1, stat = "identity", color = "black") +  
+  coord_polar("y") +  
+  scale_fill_manual(values = c("green", "red","blue","yellow","purple","orange","grey","brown")) +  
+  labs(
+    title = "Current Enrollment Category",  
+    x = NULL,  
+    y = NULL,  
+    fill = "Category"  
+  ) +
+  geom_text(aes(label = label), 
+            position = position_stack(vjust = 0.5), 
+            color = "black") 
 ```
 
 ```{r}
